@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "DeepSeek 对话导出 · 精简版",
+  "version": "1.7.1",
+  "description": "一键导出当前 DeepSeek 对话，自动滚动加载历史，记录轮次、发言人与正文；有真实时间时附上时间。",
+  "minimum_chrome_version": "111",
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "action": {
+    "default_popup": "src/popup.html",
+    "default_title": "DeepSeek 对话导出"
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://chat.deepseek.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chat.deepseek.com/*"
+      ],
+      "js": [
+        "src/inject.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://chat.deepseek.com/*"
+      ],
+      "js": [
+        "src/refine.js",
+        "src/format.js",
+        "src/exporter.js",
+        "src/content.js"
+      ],
+      "run_at": "document_start",
+      "world": "ISOLATED",
+      "all_frames": false
+    }
+  ]
+}

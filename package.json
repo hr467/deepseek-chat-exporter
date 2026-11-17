@@ -1,0 +1,8 @@
+{
+  "name": "deepseek-chat-exporter",
+  "version": "1.7.1",
+  "private": true,
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  }
+}
